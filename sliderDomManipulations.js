@@ -1,19 +1,33 @@
-const leftButton = document.querySelector('#left');
-const rightButton = document.querySelector('#right');
-const items = document.querySelector('#items');
+function createSlider(selector) {
+    const sliderContainer = document.querySelector(selector);
 
-let currentPosition = 0;
+    const leftButton = sliderContainer.querySelector('.arrow-left');
+    const rightButton = sliderContainer.querySelector('.arrow-right');
+    const items = sliderContainer.querySelector('.items');
+    const slider = sliderContainer.querySelector('.slider');
+    const slides = sliderContainer.querySelectorAll('.item');
 
-rightButton.addEventListener('click', function (e) {
-    if (currentPosition < 700) {
-        currentPosition += 100;
-        items.style.right = currentPosition + 'px';
-    }
-});
+    const itemWidth = slides[0].offsetWidth; // ширина одного слайда
+    const sliderWidth = slider.offsetWidth; // ширина слайдера
+    const totalWidth = itemWidth * slides.length; // общая ширина всех слайдов
+    const maxPosition = totalWidth - sliderWidth; // максимальное смещение
 
-leftButton.addEventListener('click', function (e) {
-    if (currentPosition > 0) {
-        currentPosition -= 100;
-        items.style.right = currentPosition + 'px';
-    }
-});
+    let currentPosition = 0;
+
+    rightButton.addEventListener('click', function (e) {
+        if (currentPosition < maxPosition) {
+            currentPosition += itemWidth;
+            items.style.right = currentPosition + 'px';
+        }
+    });
+
+    leftButton.addEventListener('click', function (e) {
+        if (currentPosition > 0) {
+            currentPosition -= itemWidth;
+            items.style.right = currentPosition + 'px';
+        }
+    });
+}
+
+createSlider('.simple-slider-container');
+
