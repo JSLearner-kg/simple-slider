@@ -15,6 +15,7 @@ function createSlider(selector) {
     let currentPosition = 0;
 
     rightButton.addEventListener('click', function (e) {
+        e.preventDefault();
         if (currentPosition < maxPosition) {
             currentPosition += itemWidth;
             items.style.right = currentPosition + 'px';
@@ -22,6 +23,7 @@ function createSlider(selector) {
     });
 
     leftButton.addEventListener('click', function (e) {
+        e.preventDefault();
         if (currentPosition > 0) {
             currentPosition -= itemWidth;
             items.style.right = currentPosition + 'px';
